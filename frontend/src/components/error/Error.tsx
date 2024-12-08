@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import animationData from "@/assets/animation.json";
+import animationData from "../../assets/animation.json";
 import Lottie from "react-lottie";
 
 interface ErrorProps {
@@ -13,7 +13,7 @@ const Error: React.FC<ErrorProps> = ({ title, description, variant = "default" }
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: "animationData",
+    animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice"
     },
