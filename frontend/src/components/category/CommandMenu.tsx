@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchCategory } from "@/services/fetchCategory";
+import { fetchCategory } from "@/services/services";
 import {
   CommandDialog,
   CommandInput,
@@ -31,8 +31,8 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions" className="no-scrollbar">
-          {categories.map((category: any) => (
-            <CommandItem key={category.id}>{category}</CommandItem>
+          {categories.map((category: any, index: number) => (
+            <CommandItem key={index}>{category}</CommandItem>
           ))}
         </CommandGroup>
       </CommandList>
