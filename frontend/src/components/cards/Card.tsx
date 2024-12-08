@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
   link: string;
@@ -7,7 +7,7 @@ type Props = {
   date: string;
 };
 
-const Card = ({ link, headline, author, date }: Props) => {
+const Card: React.FC<Props> = ({ link, headline, author, date }) => {
   return (
     <div className="flex flex-col gap-2 bg-hover max-w-xs p-5">
       <a href={link} className="text-xl font-bold">

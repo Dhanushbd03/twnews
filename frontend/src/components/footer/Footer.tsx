@@ -1,8 +1,8 @@
 import React from "react";
 
-type Props = {};
+interface Props {}
 
-const Footer = (props: Props) => {
+const Footer: React.FC<Props> = () => {
   return (
     <footer className="bg-customBackground rounded-lg shadow dark:bg-gray-900 m-4">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
