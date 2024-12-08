@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { CommandMenu } from "./CommandMenu";
-
+import React from "react";
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false);
 

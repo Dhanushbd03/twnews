@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem";
 import { fetchCategory } from "@/services/fetchCategory";
 

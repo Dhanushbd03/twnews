@@ -1,11 +1,11 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import GlobalStyles from "@/styles/GlobalStyles.tsx";
-import Error from "@/components/error/Error.tsx";
+import GlobalStyles from "@/styles/GlobalStyles";
+import Error from "@/components/error/Error";
 import "@/styles/index.css";
-import App from "./App.tsx";
-import Home from "./components/page/home.tsx";
+import App from "./App";
+import Home from "./components/page/home";
 
 const router = createBrowserRouter([
   {

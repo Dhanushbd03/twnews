@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 import { fetchCategory } from "@/services/fetchCategory";
-import { useState, useEffect } from 'react';
 import {
   CommandDialog,
   CommandInput,

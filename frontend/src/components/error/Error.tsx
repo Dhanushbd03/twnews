@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 import Layout from "@/components/layout/Layout";
-// import animationData from "@/assets/animation.json";
+import animationData from "@/assets/animation.json";
 import Lottie from "react-lottie";
 
 interface ErrorProps {

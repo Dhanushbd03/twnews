@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React from "react";
 import { CommandMenu } from "./CommandMenu";
 import Search from "./Search";
 import Categorybar from "./Categorybar";
 const Category = () => {
-  const [search, setSearch] = useState(false);
+  const [search, setSearch] = React.useState(false);
   return (
     <div className="flex gap-5">
       <Search />

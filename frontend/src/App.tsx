@@ -2,7 +2,7 @@
 import Layout from "@/components/layout/Layout";
 import Title from "@/components/title/Title";
 import Category from "@/components/category/Category";
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import Footer from "./components/footer/Footer";
 const App = ({ page }: { page: ReactElement }) => {
   return (
