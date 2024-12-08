@@ -9,6 +9,11 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "moduleResolution": "bundler",
+    "module": "preserve",
+    "target": "ESNext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   }
 }

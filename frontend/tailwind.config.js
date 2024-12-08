@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+import animate from "tailwindcss-animate";
+
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
@@ -7,7 +8,7 @@ export default {
       fontFamily: {
         parkinsans: ["Parkinsans", "sans-serif"],
         lato: ["Lato", "sans-serif"],
-        fira:["Saira Semi Condensed","sans-serif"]
+        fira: ["Saira Semi Condensed", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -60,5 +61,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 };
