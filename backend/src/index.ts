@@ -8,7 +8,11 @@ import errorHandler from "./middlewares/errorHandler";
 dotenv.config();
 const app: Application = express();
 const port: number = Number(process.env.PORT) || 3000;
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://twnewsdhanushbd.vercel.app",
+  })
+);
 app.use(errorHandler);
 app.use(express.json());
 db();
