@@ -20,12 +20,17 @@ const Search = () => {
 
   return (
     <div className="relative w-full md:w-1/3">
-      <Input
-        placeholder="Search... (⌘ K)"
-        onClick={() => setIsOpen(true)}
-        className="w-full"
-      />
-      <CommandMenu open={isOpen} setOpen={setIsOpen} />
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        setIsOpen(true);
+      }}>
+        <Input
+          placeholder="Search... (⌘ K)"
+          onClick={() => setIsOpen(true)}
+          className="w-full"
+        />
+        <CommandMenu open={isOpen} setOpen={setIsOpen}  />
+      </form>
     </div>
   );
 };

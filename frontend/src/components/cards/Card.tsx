@@ -1,22 +1,48 @@
-import React from 'react';
+import React from "react";
 
 type Props = {
+  category: string;
   link: string;
   headline: string;
-  author: string;
+  short_description: string;
+  authors: string;
   date: string;
 };
 
-const Card: React.FC<Props> = ({ link, headline, author, date }) => {
+const Card: React.FC<Props> = ({
+  category,
+  link,
+  headline,
+  authors,
+  date,
+  short_description,
+}) => {
   return (
-    <div className="flex flex-col gap-2 bg-hover max-w-xs p-5">
+    <div className="min-w-[48%] max-w-[48%] flex flex-col gap-2 filter drop-shadow-lg   p-5  bg-hover  bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100 hover:translate-x-1 hover:translate-y-1 transition-all duration-300 justify-between">
+      <p className="text-sm text-gray-500">{category}</p>
       <a href={link} className="text-xl font-bold">
         {headline}
       </a>
-      <p className="text-sm text-gray-500">{author}</p>
-      <p className="text-sm text-gray-500">{date}</p>
+      <p className="text-sm text-gray-500">{short_description}</p>
+      <div className="flex pt-5 items-center ">
+        {authors && (
+          <p className="text-sm text-gray-500 bg-hover p-2 hover:scale-95 transition-all duration-300">
+            {authors}
+          </p>
+        )}
+        <p className="text-sm text-gray-500 ml-auto">{date}</p>
+      </div>
     </div>
   );
 };
 
-export default Card;
+const SkeletonCard = () => {
+  return (
+    <div className="min-w-[48%] max-w-[48%] flex flex-col gap-2 filter drop-shadow-lg   p-5  bg-hover  bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100 hover:translate-x-1 hover:translate-y-1 transition-all duration-300 justify-between">
+      <div className="h-5 w-24 bg-gray-500 rounded animate-pulse"></div>
+      <div className="h-5 w-24 bg-gray-500 rounded animate-pulse"></div>
+      <div className="h-5 w-24 bg-gray-500 rounded animate-pulse"></div>
+    </div>
+  );
+};
+export { Card, SkeletonCard };

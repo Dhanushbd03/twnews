@@ -7,7 +7,8 @@ interface INews extends Document {
   category: string;
   short_description: string;
   authors: string;
-  date: string; // Changed to string to match the provided date format
+  date: string;
+   // Changed to string to match the provided date format
 }
 
 // Define the schema with all fields as required

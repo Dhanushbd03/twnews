@@ -16,13 +16,13 @@ const Categorybar = () => {
   }, []);
 
   return (
-    <div className="overflow-x-scroll flex gap-5 no-scrollbar">
-      {loading ? (
-        <div>Loading...</div> // Skeleton placeholder
-      ) : (
-        categories.map((category: any, index: number) => (
+    <div className="overflow-x-scroll flex gap-5 no-scrollbar items-center">
+      {categories.map((category: any, index: number) =>
+        loading ? (
+          <div className="h-5 w-24 bg-gray-500 rounded animate-pulse"></div>
+        ) : (
           <CategoryItem key={index} category={category} />
-        ))
+        )
       )}
     </div>
   );
