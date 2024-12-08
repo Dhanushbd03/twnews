@@ -1,4 +1,5 @@
 import { fetchCategory } from "@/services/fetchCategory";
+import { useState, useEffect } from 'react';
 import {
   CommandDialog,
   CommandInput,
@@ -12,8 +13,18 @@ interface CommandMenuProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
-const categories = await fetchCategory();
+
 export function CommandMenu({ open, setOpen }: CommandMenuProps) {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const fetchedCategories = await fetchCategory();
+      setCategories(fetchedCategories);
+    };
+    getCategories();
+  }, []);
+
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Search category..." />
