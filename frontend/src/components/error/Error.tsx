@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import animationData from "../../assets/animation.json";
+import animationData from "@/assets/error.json";
 import Lottie from "react-lottie";
 
 interface ErrorProps {
@@ -9,15 +9,19 @@ interface ErrorProps {
   variant?: "default" | "destructive";
 }
 
-const Error: React.FC<ErrorProps> = ({ title, description, variant = "default" }) => {
+const Error: React.FC<ErrorProps> = ({
+  title,
+  description,
+  variant = "default",
+}) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
+      preserveAspectRatio: "xMidYMid slice",
     },
-    variant: variant
+    variant: variant,
   };
 
   return (
@@ -28,7 +32,7 @@ const Error: React.FC<ErrorProps> = ({ title, description, variant = "default" }
         <p className="text-lg">{description}</p>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
 export default Error;
