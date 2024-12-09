@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "border-2 border-primary font-lato hover:bg-gray-500/10 relative bg-customBackground hover:translate-x-1 hover:translate-y-1 hover:bg-customBackground/80 ",
+          "border-2 border-primary font-lato relative bg-customBackground hover:translate-x-1 hover:translate-y-1 hover:bg-customBackground/80 ",
       },
       size: {
         default: "h-9 px-4 py-2",
