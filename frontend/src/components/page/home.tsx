@@ -7,6 +7,7 @@ const Home = () => {
   const [topNews, setTopNews] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     fetchTopNews().then((data) => setTopNews(data));
     setLoading(false);
   }, []);
