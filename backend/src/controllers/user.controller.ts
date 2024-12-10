@@ -13,12 +13,14 @@ export const registerUser = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
     });
+    console.log("user:", user);
     res.status(200).json({ message: constants.REGISTER_SUCCESS });
   } catch (error: any) {
+    console.log("error:", error);
     if (error.code === 11000) {
-      return res.status(400).json({ message: constants.EMAIL_ALREADY_EXISTS });
+      return res.status(400).json({ message: constants.EMAIL_ALREADY_EXISTS, error: error.message });
     }
-    res.status(500).json({ message: constants.INTERNAL_SERVER_ERROR });
+    res.status(500).json({ message: constants.INTERNAL_SERVER_ERROR, error: error.message });
   }
 };
 

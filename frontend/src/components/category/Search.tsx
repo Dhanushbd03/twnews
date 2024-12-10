@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { CommandMenu } from "./CommandMenu";
 import React from "react";
+import { SearchIcon } from "lucide-react";
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,16 +20,12 @@ const Search = () => {
   }, []);
 
   return (
-    <div className="relative w-full md:w-1/3">
+    <div className="relative">
       <form onSubmit={(e) => {
         e.preventDefault();
         setIsOpen(true);
       }}>
-        <Input
-          placeholder="Search... (⌘ K)"
-          onClick={() => setIsOpen(true)}
-          className="w-full"
-        />
+        <SearchIcon className="text-gray-500 mt-1 size-6 hover:cursor-pointer hover:text-primary transition-all duration-300 hover:scale-110 focus:scale-95"  onClick={() => setIsOpen(true)} />
         <CommandMenu open={isOpen} setOpen={setIsOpen}  />
       </form>
     </div>

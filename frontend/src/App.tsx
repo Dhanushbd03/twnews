@@ -4,6 +4,7 @@ import Title from "@/components/title/Title";
 import Category from "@/components/category/Category";
 import React, { ReactElement } from "react";
 import Footer from "./components/footer/Footer";
+import { Toaster } from "./components/ui/sonner";
 const App = ({ page }: { page: ReactElement }) => {
   return (
     <Layout>
@@ -11,6 +12,7 @@ const App = ({ page }: { page: ReactElement }) => {
       <Category />
       {page}
       <Footer />
+      <Toaster richColors />
     </Layout>
   );
 };
