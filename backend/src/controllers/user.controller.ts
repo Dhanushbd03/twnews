@@ -13,14 +13,18 @@ export const registerUser = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
     });
-    console.log("user:", user);
-    res.status(200).json({ message: constants.REGISTER_SUCCESS });
+    res.status(200).json({ message: "Registration successful , Please login" });
   } catch (error: any) {
     console.log("error:", error);
     if (error.code === 11000) {
-      return res.status(400).json({ message: constants.EMAIL_ALREADY_EXISTS, error: error.message });
+      return res.status(400).json({
+        message: "Email or Username already exists , please login",
+        error: error.message,
+      });
     }
-    res.status(500).json({ message: constants.INTERNAL_SERVER_ERROR, error: error.message });
+    res
+      .status(500)
+      .json({ message: "Something went wrong , please try again", error: error.message });
   }
 };
 

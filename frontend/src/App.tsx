@@ -7,7 +7,7 @@ import Footer from "./components/footer/Footer";
 import { Toaster } from "./components/ui/sonner";
 const App = ({ page }: { page: ReactElement }) => {
   return (
-    <Layout>
+    <Layout >
       <Title />
       <Category />
       {page}

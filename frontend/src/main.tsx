@@ -12,6 +12,7 @@ import App from "./App";
 import Home from "./components/page/home";
 import CategoryPage from "./components/page/categoryPage";
 import Signup from "./components/auth/Signup";
+import Signin from './components/auth/Signin';
 
 const router = createBrowserRouter([
 	{
@@ -32,10 +33,10 @@ const router = createBrowserRouter([
 		path: "/signup",
 		element: <App page={<Signup />} />,
 	},
-	// {
-	// 	path: "/signin",
-	// 	element: <App page={<Signin />} />,
-	// },
+	{
+		path: "/signin",
+		element: <App page={<Signin />} />,
+	},
 ]);
 
 const root = createRoot(document.getElementById("root")!);
