@@ -4,7 +4,13 @@ import { fetchTopNews } from "@/services/services";
 import { toast } from "sonner";
 interface News {
   _id: string;
-  [key: string]: any;
+  key: string;
+  category: string;
+  link: string;
+  headline: string;
+  short_description: string;
+  authors: string;
+  date: string;
 }
 
 const Home: React.FC = () => {

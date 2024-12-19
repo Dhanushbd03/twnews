@@ -8,11 +8,14 @@ import { Eye, EyeOff } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import Lottie from "react-lottie";
 import loadingAnimation from "@/assets/loading.json";
-import AuthContext from "@/Context/AuthProvider";
+import { useAuth } from "@/Context/AuthProvider";
 
 const Signin: React.FC = () => {
-  const navigate = useNavigate();
-  const { login, user } = useContext(AuthContext);
+  const navigate = useNavigate(); 
+  const { login, user } = useAuth();
+  if(user) {
+    navigate("/");
+  }
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -29,14 +32,11 @@ const Signin: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      login(formData);
-      toast.success(user?.message || "Login successful", {
-        duration: 3000,
-      });
-      navigate("/");
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response?.data?.message || "An error occurred", {
+      await login(formData); // Wait for the login to complete
+      toast.success("Login successful", { duration: 3000 });
+      navigate("/"); // Navigate after successful login
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "An error occurred", {
         duration: 3000,
       });
       setFormData({
@@ -56,7 +56,7 @@ const Signin: React.FC = () => {
           <span>Sign in with Google</span>
         </Button>
 
-        <p className="">OR</p>
+        <p>OR</p>
         {loading ? (
           <Lottie
             options={{
@@ -121,7 +121,6 @@ const Signin: React.FC = () => {
       </div>
     </div>
   );
-  
 };
 
 export default Signin;

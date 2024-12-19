@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 interface CategoryItemProps {
-  category: string;
+  category: any;
 }
 const CategoryItem = ({ category }: CategoryItemProps) => {
-
   return (
     <div className="flex items-center justify-center relative group categoryBox">
       {" "}

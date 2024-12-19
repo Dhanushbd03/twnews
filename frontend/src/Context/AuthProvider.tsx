@@ -1,5 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "@/api/axios";
+import { toast } from "sonner";
 
 type User = {
   message: string;
@@ -7,19 +8,22 @@ type User = {
   username: string;
   email: string;
 };
+
 type loginData = {
   username: string;
-  password: string
+  password: string;
 };
 
 type AuthContextType = {
-user: User | null;
-login:(user:loginData)=>void
+  user: User | null;
+  login: (user: loginData) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
@@ -29,31 +33,44 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async (user: loginData) => {
     try {
       const response = await axios.post("/auth/login", user, {
-        withCredentials: true
-      })
-      setUser(response.data)
-      return response.data;
-    } catch {
-      throw new Error("login failed")
+        withCredentials: true,
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.error("Login failed:", error);
+      throw new Error("Login failed");
     }
   };
-  // verify user
+
+  const logout = async () => {
+    await axios.post("/auth/logout", { withCredentials: true });
+    toast.warning("User logged out");
+    setUser(null);
+  };
+
+  // verify user (run only once on component mount)
   useEffect(() => {
     const verifyUser = async () => {
-      const response = await axios.get("/auth/verify", {
-        withCredentials: true
-      })
-      setUser(response.data)
-    }
-    verifyUser()
-  }, [user])
-
-  console.log(user)
+      try {
+        const response = await axios.get("/auth/verify", {
+          withCredentials: true,
+        });
+        setUser(response.data);
+      } catch (error) {
+        console.error("User verification failed:", error);
+      }
+    };
+    verifyUser();
+  }, []); // Empty dependency array ensures this only runs once on mount
   return (
-    <AuthContext.Provider value={{user , login}}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
-export default AuthContext;
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export default useAuth;

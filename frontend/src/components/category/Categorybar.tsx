@@ -2,9 +2,15 @@ import React, { useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem";
 import { fetchCategory } from "@/services/services";
 
+interface Category {
+  id: string;
+  name: string;
+  // Add other properties as needed
+}
+
 const Categorybar: React.FC = () => {
-  const [categories, setCategories] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const scrollDiv = document.getElementById("scrollCategory");
@@ -31,7 +37,7 @@ const Categorybar: React.FC = () => {
   useEffect(() => {
     const getCategories = async () => {
       try {
-        const fetchedCategories = await fetchCategory();
+        const fetchedCategories: Category[] = await fetchCategory();
         setCategories(fetchedCategories);
         setLoading(false);
       } catch (error) {
@@ -41,7 +47,6 @@ const Categorybar: React.FC = () => {
 
     getCategories();
   }, []);
-
   return (
     <div
       id="scrollCategory"
@@ -51,7 +56,9 @@ const Categorybar: React.FC = () => {
         ? Array.from({ length: 5 }).map((_, index) => (
             <div key={index} className="h-5 w-24 animate-pulse rounded bg-gray-500"></div>
           ))
-        : categories.map((category, index) => <CategoryItem key={index} category={category} />)}
+        : categories.map((category, index) => (
+            <CategoryItem key={index} category={category} />
+          ))}
     </div>
   );
 };

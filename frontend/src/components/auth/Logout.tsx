@@ -1,16 +1,16 @@
-// import React from 'react'
-// import { Button } from '@/components/ui/button';
-// import { useAuth } from '@/provider/AuthProvider';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/Context/AuthProvider';
 
-// type Props = {
-//   className?: string;
-// }
+interface Props {
+  className?: string;
+}
 
-// const Logout = ({className}: Props) => {
-//   const { logout } = useAuth();
-//   return (
-//     <Button className={`${className} ml-auto`} onClick={logout}>Logout</Button>
-//   )
-// }
+const Logout: React.FC<Props> = ({ className }) => {
+  const { logout } = useAuth();
+  return (
+    <Button divClassName={`${className} ml-auto`} onClick={logout}>Logout</Button>
+  );
+}
 
-// export default Logout
+export default Logout;

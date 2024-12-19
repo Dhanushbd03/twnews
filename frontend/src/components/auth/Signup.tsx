@@ -9,10 +9,15 @@ import { Eye, EyeOff } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import Lottie from "react-lottie";
 import loadingAnimation from "@/assets/loading.json";
+import useAuth from "@/Context/AuthProvider";
 type Props = {};
 
 const Signup: React.FC<Props> = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  if(user) {
+    navigate("/");
+  }
   const [formData, setFormData] = useState({
     username: "",
     email: "",

@@ -14,12 +14,21 @@ interface CommandMenuProps {
 	setOpen: (open: boolean) => void;
 }
 
+interface Category {
+	id: string;
+	name: string;
+}
+
 export function CommandMenu({ open, setOpen }: CommandMenuProps) {
-	const [categories, setCategories] = useState([]);
+	const [categories, setCategories] = useState<Category[]>([]);
 	useEffect(() => {
 		const getCategories = async () => {
-			const fetchedCategories = await fetchCategory();
-			setCategories(fetchedCategories);
+			try {
+				const fetchedCategories: Category[] = await fetchCategory();
+				setCategories(fetchedCategories);
+			} catch (error) {
+				console.error("Error fetching categories:", error);
+			}
 		};
 		getCategories();
 	}, []);
@@ -29,15 +38,14 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
 			open={open}
 			onOpenChange={setOpen}>
 			<CommandInput placeholder="Search category..." />
-			<CommandList>
+			<CommandList >
 				<CommandEmpty>No results found.</CommandEmpty>
 				<CommandGroup
 					heading="Suggestions"
 					className="no-scrollbar">
-					{categories &&
-						categories.map((category: any, index: number) => (
-							<CommandItem key={index}>{category}</CommandItem>
-						))}
+					{categories.map((category, index) => (
+						<CommandItem key={index}>{`${category}`}</CommandItem>
+					))}
 				</CommandGroup>
 			</CommandList>
 		</CommandDialog>
