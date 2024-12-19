@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
+import axios from "@/api/axios";
 import img from "@/assets/signup.jpeg";
 import { toast } from "sonner";
 import { Eye, EyeOff } from "lucide-react";
@@ -29,24 +29,23 @@ const Signup: React.FC<Props> = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-          setLoading(true);
+    setLoading(true);
     if (error) {
       toast.error(error, {
         duration: 3000,
       });
+      setLoading(false);
       return;
     }
     try {
-      const response = await axios.post(`${import.meta.env.VITE_URL}/register`, formData);
-      setLoading(false);
-      toast.success(response.data.message, {
+      const response = await axios.post(`/auth/register`, formData);
+      toast.success(response?.data?.message, {
         duration: 3000,
       });
       setTimeout(() => {
         navigate("/signin");
       }, 1000);
     } catch (error) {
-      setLoading(false);
       toast.error(error.response.data.message, {
         duration: 3000,
       });
@@ -56,6 +55,8 @@ const Signup: React.FC<Props> = () => {
         password: "",
         confirmPassword: "",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -87,7 +88,7 @@ const Signup: React.FC<Props> = () => {
 
   return (
     <div className="flex max-h-[600px] border border-hover bg-gray-500 bg-opacity-10 backdrop-blur-lg backdrop-filter sm:m-4">
-      <div className="my-auto flex w-full flex-col items-center gap-3  p-5 sm:w-1/2">
+      <div className="my-auto flex w-full flex-col items-center gap-3 p-5 sm:w-1/2">
         <Button divClassName="w-fit flex items-center gap-2">
           <FcGoogle className="size-6" />
           <span>Sign in with Google</span>
@@ -114,6 +115,7 @@ const Signup: React.FC<Props> = () => {
               value={formData.username}
               className="h-10"
               onChange={handleChange}
+              required
             />
             <Input
               type="email"
@@ -122,6 +124,7 @@ const Signup: React.FC<Props> = () => {
               placeholder="Email"
               className="h-10"
               onChange={handleChange}
+              required
             />
             <div className="relative w-full">
               <Input
@@ -153,14 +156,14 @@ const Signup: React.FC<Props> = () => {
               className="h-10"
               onChange={handleChange}
             />
-            {error && <p className=" text-red-500">{error}</p>}
+            {error && <p className="text-red-500">{error}</p>}
             <Button type="submit" divClassName="w-40" className="h-10 w-40">
               Sign Up
             </Button>
           </form>
         )}
 
-        <p className="text-sm text-gray-500 py-5">
+        <p className="py-5 text-sm text-gray-500">
           Already have an account? <Link to="/signin">Login</Link>
         </p>
       </div>

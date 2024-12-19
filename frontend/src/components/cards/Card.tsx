@@ -1,6 +1,8 @@
 import React from "react";
 
 type Props = {
+  _id: string;
+  key: string;
 	category: string;
 	link: string;
 	headline: string;

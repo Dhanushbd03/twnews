@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Card, SkeletonCard } from "../cards/Card";
 import { fetchTopNews } from "@/services/services";
+import { toast } from "sonner";
+interface News {
+  _id: string;
+  [key: string]: any;
+}
 
 const Home: React.FC = () => {
-  const [topNews, setTopNews] = useState<any[]>([]);
+  const [topNews, setTopNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -14,8 +18,8 @@ const Home: React.FC = () => {
         const data = await fetchTopNews();
         setTopNews(data);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching top news:", error);
+      } catch (error:any) {
+        toast.error("error in fetching news , try reloading ")
         setError(true);
         setLoading(false);
       }

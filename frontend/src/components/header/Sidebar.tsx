@@ -10,6 +10,7 @@ type Props = {
 };
 
 const Sidebar = ({ isOpen, setIsOpen }: Props) => {
+  
   return (
     <div
       className={`md:hidden fixed top-0 left-0 h-screen bg-customBackground bg-opacity-100 backdrop-filter backdrop-blur-sm z-50 overflow-hidden transition-all duration-300 ease-in-out border-r border-primary ${

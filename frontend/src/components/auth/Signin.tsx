@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import img from "@/assets/signup.jpeg";
 import { toast } from "sonner";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import Lottie from "react-lottie";
 import loadingAnimation from "@/assets/loading.json";
+import AuthContext from "@/Context/AuthProvider";
 
-type Props = {};
-
-const Signin: React.FC<Props> = () => {
+const Signin: React.FC = () => {
   const navigate = useNavigate();
+  const { login, user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [show, setShow] = useState(false);
@@ -30,24 +29,22 @@ const Signin: React.FC<Props> = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_URL}/login`, formData);
-      setLoading(false);
-      toast.success(response.data.message, {
+      login(formData);
+      toast.success(user?.message || "Login successful", {
         duration: 3000,
       });
-      document.cookie = `token=${response.data.token}; path=/; max-age=86400; secure; samesite=strict`;
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
-    } catch (error) {
-      setLoading(false);
-      toast.error(error.response.data.message, {
+      navigate("/");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "An error occurred", {
         duration: 3000,
       });
       setFormData({
-        email: "",
+        username: "",
         password: "",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,6 +64,8 @@ const Signin: React.FC<Props> = () => {
               autoplay: true,
               animationData: loadingAnimation,
             }}
+            height={200}
+            width={200}
           />
         ) : (
           <form
@@ -74,12 +73,13 @@ const Signin: React.FC<Props> = () => {
             onSubmit={handleSubmit}
           >
             <Input
-              type="email"
-              name="email"
-              value={formData.email}
-              placeholder="Email"
+              type="text"
+              name="username"
+              value={formData.username}
+              placeholder="Username"
               className="h-10"
               onChange={handleChange}
+              autoComplete="off"
               required
             />
             <div className="relative w-full">
@@ -90,10 +90,11 @@ const Signin: React.FC<Props> = () => {
                 placeholder="Password"
                 className="h-10"
                 onChange={handleChange}
+                autoComplete="off"
                 required
               />
               <Button
-                divClassName="!absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-300 w-fit "
+                divClassName="!absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-300 w-fit"
                 className=""
                 onClick={() => setShow(!show)}
                 type="button"
@@ -120,6 +121,7 @@ const Signin: React.FC<Props> = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Signin;

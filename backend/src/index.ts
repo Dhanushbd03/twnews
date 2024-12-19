@@ -5,15 +5,18 @@ import { db } from "./db/db";
 import newsRouter from "./routes/news.route";
 import userRouter from "./routes/user.route";
 import errorHandler from "./middlewares/errorHandler";
+import cookieParser from "cookie-parser";
 dotenv.config();
 const app: Application = express();
 const port: number = Number(process.env.PORT) || 3000;
 app.use(
   cors({
     origin: ["https://twnewsdhanushbd.vercel.app", process.env.URL1 || ""],
+    credentials: true,
   })
 );
 app.use(express.json());
+app.use(cookieParser())
 db();
 
 app.use("/api", newsRouter);

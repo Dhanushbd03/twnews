@@ -13,7 +13,7 @@ import Home from "./components/page/home";
 import CategoryPage from "./components/page/categoryPage";
 import Signup from "./components/auth/Signup";
 import Signin from './components/auth/Signin';
-
+import { AuthProvider } from "./Context/AuthProvider";
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -39,16 +39,21 @@ const router = createBrowserRouter([
 	},
 ]);
 
-const root = createRoot(document.getElementById("root")!);
-
 function CategoryPageWrapper() {
 	const params = useParams();
 	return <CategoryPage category={params.category} />;
 }
 
+export default CategoryPageWrapper;
+
+const rootElement = document.getElementById("root")!;
+const root = createRoot(rootElement);
+
 root.render(
 	<StrictMode>
 		<GlobalStyles />
-		<RouterProvider router={router} />
+		<AuthProvider>
+			<RouterProvider router={router} />
+		</AuthProvider>
 	</StrictMode>
 );
