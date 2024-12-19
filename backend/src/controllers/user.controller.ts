@@ -84,9 +84,9 @@ export const loginUser = async (req: Request, res: Response) => {
     // Set the token in a secure HTTP-only cookie
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV == "production", // Use secure cookies in production
+      secure: process.env.BUILD_ENV == "production", // Use secure cookies in production
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
-      sameSite: process.env.NODE_ENV == "production" ? "none" : "lax",
+      sameSite: process.env.BUILD_ENV == "production" ? "none" : "lax",
       path: "/",
     });    
     // Return a success message along with user data (excluding password)
